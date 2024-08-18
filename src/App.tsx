@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import TeamList from './components/team/TeamList';
+import { createStore } from './redux/store';
+import { Provider } from 'react-redux';
+import { createTeam } from './api/team';
+import './styles.scss';
+const App: React.FC = () => {
+  const [store] = useState(createStore())
+  const [teamId, setTeamId] = useState<string | null>(null)
+  useEffect(() => {
+    const model = {teamId: crypto.randomUUID()}
+    createTeam(model).then(x => setTeamId(x));
+  }, [])
 
-function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Provider store={store}>
+    <div className="app-container">
+      <h1>Lista członków zespołu</h1>
+      {teamId && <TeamList teamId={teamId}/>}
     </div>
+    </Provider>
   );
-}
+};
 
 export default App;
+

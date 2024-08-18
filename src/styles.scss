@@ -1,0 +1,41 @@
+.app-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+  }
+  
+  .team-list {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .team-list__header {
+    display: flex;
+    padding: 16px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+  }
+  
+  .team-list__header-item {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .team-list__item {
+    display: flex;
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+  }
+  
+  
+    
