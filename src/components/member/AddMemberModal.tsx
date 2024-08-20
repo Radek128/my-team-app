@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { createMember, TeamMember } from '../../api/member';
 import { Button } from '../buttons/Button';
 import { EditionSection, InputFileds } from './EditionSection';
-import '../../styles.scss';
 import { Modal } from '../../controls/modals/Modal';
+import '../../styles.scss';
 
 interface AddMemberProps {
   isOpen: boolean,
@@ -73,7 +73,7 @@ const inputFields : InputFileds[] = [
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} >
-    <div className="modal">
+    <div className="modal-confirm">
       <h2>Dodawanie nowego członka zespołu</h2>
       <EditionSection inputFields={inputFields} handleChange={handleChange}/>
       <Button onClickHandler={handleSubmit} text='Potwierdź'/>

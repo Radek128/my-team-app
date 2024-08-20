@@ -16,7 +16,6 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
     <div className="app-container">
-      <h1>Lista członków zespołu</h1>
       {teamId && <TeamList teamId={teamId}/>}
     </div>
     </Provider>

@@ -23,8 +23,22 @@
     background-color: #f5f5f5;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
+    display: flex;
+    text-align: left;
+    gap: 15px;
   }
-  
+
+  .team-list__textSection {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .team-list__buttons{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
   .team-list__header-item {
     flex: 1;
     text-align: left;
@@ -35,6 +49,7 @@
     padding: 16px;
     border-bottom: 1px solid #eee;
     align-items: center;
+    flex-direction: row;
   }
   
   .modal-overlay {
@@ -61,23 +76,23 @@
   }
 
   .button-cancel {
-    background-color: transparent; /* Przezroczyste tło */
-    border: 1px solid #ccc; /* Jasnoszare obramowanie */
-    border-radius: 20px; /* Zaokrąglone rogi */
-    padding: 10px 20px; /* Odstępy wewnętrzne */
-    font-size: 14px; /* Rozmiar tekstu */
-    color: #333; /* Kolor tekstu */
+    background-color: transparent;
+    border: 1px solid #ccc; 
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #333; 
     cursor: pointer;
-    margin-right: 10px; /* Odstęp po prawej stronie */
+    margin-right: 10px; 
 }
 
 .button-confirm {
-    background-color: #ff7a33; /* Pomarańczowe tło */
-    border: none; /* Bez obramowania */
-    border-radius: 20px; /* Zaokrąglone rogi */
-    padding: 10px 20px; /* Odstępy wewnętrzne */
-    font-size: 14px; /* Rozmiar tekstu */
-    color: white; /* Biały kolor tekstu */
+    background-color: #ff7a33; 
+    border: none; 
+    border-radius: 20px; 
+    padding: 10px 20px; 
+    font-size: 14px;
+    color: white; 
     cursor: pointer;
 }
 
@@ -99,5 +114,13 @@
   height: 100px;
   border-radius: 10%;
   margin-bottom: 15px;
+}
+
+.input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
     

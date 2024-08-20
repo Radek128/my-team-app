@@ -11,10 +11,8 @@ interface ConfirmationModalProps {
 export const ConfirmationModal = ({isOpen, text, onClose } : ConfirmationModalProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} >
-    <div className="modal">
       <p>{text}</p>
       <Button onClickHandler={onClose} text='Zamknij'/>
-    </div>
     </Modal>
   );
 }
