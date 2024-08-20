@@ -37,10 +37,14 @@ const handleCloseModal =  () => {
   loadMembers();
 }
 
+const handleClose =() => {
+  loadMembers()
+}
+
   return (
     <div className="team-list">
       <TeamListHeader onClickAddHandler={handleAddMember} onClickImportHandler={handleImportMember}/>
-      <TeamListContent members={state.members}/>
+      <TeamListContent members={state.members} handleCloseModal={handleClose}/>
       <AddMemberModal isOpen={isAddMemberModalOpen} teamId={teamId} onClose={handleCloseModal}/>
     </div>
   );

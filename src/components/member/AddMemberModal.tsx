@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createMember, TeamMember } from '../../api/member';
 import { Modal } from '../modals/Modal';
 import { Button } from '../buttons/Button';
-import { Input } from '../../controls/Input';
+import { EditionSection, InputFileds } from './EditionSection';
 import '../../styles.scss';
 
 interface AddMemberProps {
@@ -54,7 +54,7 @@ const AddMemberModal = ({ isOpen, onClose, teamId } : AddMemberProps) => {
     await createMember(teamMember)
     onClose();
   };
-  
+
   const handleChange = (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setMember(prevState => ({
@@ -63,15 +63,19 @@ const AddMemberModal = ({ isOpen, onClose, teamId } : AddMemberProps) => {
   }));
 };
 
+const inputFields : InputFileds[] = [
+    { type: "text", placeholder: "Imię", value: firstName, name: "firstName" },
+    { type: "text", placeholder: "Nazwisko", value: lastName, name: "lastName" },
+    { type: "email", placeholder: "Adres e-mail", value: email, name: "email" },
+    { type: "tel", placeholder: "Numer telefonu", value: phoneNumber, name: "phoneNumber" },
+    { type: "text", placeholder: "Link do zdjęcia", value: avatar, name: "avatar" }
+  ];
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} >
     <div className="modal">
       <h2>Dodawanie nowego członka zespołu</h2>
-      <Input type="text" placeHolder="Imię" value={firstName} handleChange={e => handleChange("firstName", e)} />
-      <Input type="text" placeHolder="Nazwisko" value={lastName} handleChange={e => handleChange("lastName", e)} />
-      <Input type="email" placeHolder="Adres e-mail" value={email} handleChange={e => handleChange("email", e)} />
-      <Input type="tel" placeHolder="Numer telefonu" value={phoneNumber} handleChange={e => handleChange("phoneNumber", e)} />
-      <Input type="text" placeHolder="Link do zdjęcia" value={avatar} handleChange={e => handleChange("avatar", e)} />
+      <EditionSection inputFields={inputFields} handleChange={handleChange}/>
       <Button onClickHandler={handleSubmit} text='Potwierdź'/>
       <Button onClickHandler={onClose} text='Anuluj'/>
     </div>

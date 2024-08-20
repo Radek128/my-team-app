@@ -4,10 +4,11 @@ import MemberProfileModal from '../member/MemberProfileModal';
 import '../../styles.scss';
 
 interface AddMemberProps {
-  member: TeamMemberDto
+  member: TeamMemberDto,
+  handleCloseModal: () => void;
 }
 
-export const TeamMemberItem = ({ member } : AddMemberProps) => {
+export const TeamMemberItem = ({ member, handleCloseModal } : AddMemberProps) => {
   const [isMemberProfileOpen, setMemberProfileOpen] = useState<boolean>(false);
   const status = member.isActive ? "Aktywny" : "Nieaktywny";
   const dateObject = new Date(member.createdOn).toLocaleDateString();
@@ -16,6 +17,7 @@ export const TeamMemberItem = ({ member } : AddMemberProps) => {
     setMemberProfileOpen(true);
   }
   const handleClose =  () => {
+    handleCloseModal();
     setMemberProfileOpen(false);
   }
   

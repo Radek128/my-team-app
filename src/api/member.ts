@@ -1,13 +1,17 @@
-import { get, post } from "./axiosSource";
+import { get, post, put } from "./axiosSource";
 
 const devAddress = 'https://localhost:5000'
-export interface TeamMember {
-    memberId: string;
+
+export interface UpdateMember {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  memberId: string;
+}
+
+export interface TeamMember extends UpdateMember{
     teamId: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
     avatar: string;
     isActive: boolean;
   }
@@ -18,6 +22,9 @@ export interface TeamMember {
 
 export const getMember = (memberId: string): Promise<TeamMemberDto> => 
     get(`${devAddress}/teams/members/${memberId}`);
+
+export const updateMember = (member: UpdateMember): Promise<any> => 
+  put(`${devAddress}/teams/members/${member.memberId}`, member);
 
 export const getMembers = (teamId: string): Promise<TeamMemberDto[]> => 
     get(`${devAddress}/teams/${teamId}/members`);
