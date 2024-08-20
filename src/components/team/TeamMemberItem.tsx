@@ -40,17 +40,16 @@ export const TeamMemberItem = ({ member, handleCloseModal } : AddMemberProps) =>
     handleCloseActionModal();
   }
   
+  const paragraphs : string[]= [member.firstName, member.lastName, member.email, member.phoneNumber, status, dateObject]
+  
   return (
     <>
     <li className="team-list__item" onClick={hanldeClickMemberItem}>
       <img src={member.avatar} alt={member.firstName} className="member-avatar" />
       <div className="member-info">
-        <p className="member-name">{member.firstName}</p>
-        <p className="member-last">{member.lastName}</p>
-        <p className="member-email">{member.email}</p>
-        <p className="member-phone">{member.phoneNumber}</p>
-        <p className="member-status">{status}</p>
-        <p className="member-date">{dateObject}</p>
+        {paragraphs.map((p, index) => (
+          <p key={index}>{p}</p>)
+          )}
       </div>
     </li>
     <div onClick={() => setActionModalOpen(true)}><FormatListBulletedIcon/></div>   
