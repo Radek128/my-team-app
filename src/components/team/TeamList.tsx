@@ -1,12 +1,12 @@
 import { useEffect, useReducer, useState } from 'react';
-import TeamMemberItem from './TeamMemberItem';
-import { initialState, teamReducer } from '../../redux/team';
+import { initialState, teamReducer } from '../../redux/teamReducer';
 import { loadMembersList } from '../../actions/member';
-import { AddButton } from '../buttons/AddButton';
 import { createMember } from '../../api/member';
 import { useFetchUser } from '../../hooks/useCreateUser';
-import '../../styles.scss';
+import { TeamListHeader } from './TeamListHeader';
+import { TeamListContent } from './TeamListContent';
 import AddMemberModal from '../member/AddMemberModal';
+import '../../styles.scss';
 
 export interface TeamListProps{
   teamId: string
@@ -20,7 +20,7 @@ const TeamList = ({teamId}: TeamListProps) => {
 
 useEffect(() => {
     loadMembers()
-  }, []) 
+  }, [teamId]) 
 
 const handleImportMember = async () => {
   const member = await newMember();
@@ -28,7 +28,7 @@ const handleImportMember = async () => {
   loadMembers();
 }
 
-const handleAddMember = async () => {
+const handleAddMember = () => {
   setAddMemberModalOpen(true);
 }
 
@@ -39,16 +39,9 @@ const handleCloseModal =  () => {
 
   return (
     <div className="team-list">
-      <div className="team-list__header">
-        <AddButton text={"Zaimportuj członka zespołu"} onClickHandler={handleImportMember}/>
-        <AddButton text={"Dodaj członka zespołu"} onClickHandler={handleAddMember}/>
-      </div>
-      <ul className="team-list__header-item">
-        {state.members.map(member => (
-          <TeamMemberItem key={member.memberId} member={member} />
-        ))}
-      </ul>
-      {isAddMemberModalOpen && <AddMemberModal teamId={teamId} onClose={handleCloseModal}/>}
+      <TeamListHeader onClickAddHandler={handleAddMember} onClickImportHandler={handleImportMember}/>
+      <TeamListContent members={state.members}/>
+      <AddMemberModal isOpen={isAddMemberModalOpen} teamId={teamId} onClose={handleCloseModal}/>
     </div>
   );
 };

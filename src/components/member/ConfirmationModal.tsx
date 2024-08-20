@@ -1,10 +1,16 @@
 import React from 'react';
+import { Button } from '../buttons/Button';
 
-const ConfirmationModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+interface ConfirmationModalProps {
+  onClose: () => void,
+  text: string
+}
+
+const ConfirmationModal = ({ text, onClose } : ConfirmationModalProps) => {
   return (
     <div className="modal">
-      <p>Członek zespołu został dodany</p>
-      <button onClick={onClose}>Zamknij</button>
+      <p>{text}</p>
+      <Button onClickHandler={onClose} text='Zamknij'/>
     </div>
   );
 };

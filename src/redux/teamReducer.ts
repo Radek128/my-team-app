@@ -16,7 +16,7 @@ export const teamReducer: Reducer<TeamState, LoadMembersListAction> =
     case LOAD_MEMBER_LIST: {
       return{
         ...state,
-        members: action.payload
+        members: [...action.payload]
       }
     }
     default: 

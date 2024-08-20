@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { teamReducer } from './team';
+import { teamReducer } from './teamReducer';
 import { configureStore } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
