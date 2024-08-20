@@ -8,8 +8,8 @@ export interface InputFileds {
 }
 
 export interface EditSectionProps {
-inputFields: InputFileds[],
-handleChange:(name: string, e: React.ChangeEvent<HTMLInputElement>) => void
+    inputFields: InputFileds[],
+    handleChange:(name: string, e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const EditionSection = ( {inputFields, handleChange}: EditSectionProps) => 
@@ -25,6 +25,6 @@ export const EditionSection = ( {inputFields, handleChange}: EditSectionProps) =
               handleChange={e => handleChange(field.name, e)}
             />
           ))}
-          </>
+        </>
     )
 }

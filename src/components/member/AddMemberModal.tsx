@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { createMember, TeamMember } from '../../api/member';
-import { Modal } from '../modals/Modal';
 import { Button } from '../buttons/Button';
 import { EditionSection, InputFileds } from './EditionSection';
 import '../../styles.scss';
+import { Modal } from '../../controls/modals/Modal';
 
 interface AddMemberProps {
   isOpen: boolean,

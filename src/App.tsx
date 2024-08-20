@@ -4,6 +4,7 @@ import { createStore } from './redux/store';
 import { Provider } from 'react-redux';
 import { createTeam } from './api/team';
 import './styles.scss';
+
 const App: React.FC = () => {
   const [store] = useState(createStore())
   const [teamId, setTeamId] = useState<string | null>(null)

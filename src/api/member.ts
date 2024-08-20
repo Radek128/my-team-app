@@ -2,6 +2,11 @@ import { get, post, put } from "./axiosSource";
 
 const devAddress = 'https://localhost:5000'
 
+export interface UpdateMemberStatus{
+  isActiveStatus: boolean;
+  memberId: string;
+}
+
 export interface UpdateMember {
   firstName: string;
   lastName: string;
@@ -25,6 +30,9 @@ export const getMember = (memberId: string): Promise<TeamMemberDto> =>
 
 export const updateMember = (member: UpdateMember): Promise<any> => 
   put(`${devAddress}/teams/members/${member.memberId}`, member);
+
+export const updateMemberStatus = (member: UpdateMemberStatus): Promise<any> => 
+  put(`${devAddress}/teams/members/${member.memberId}/status`, member);
 
 export const getMembers = (teamId: string): Promise<TeamMemberDto[]> => 
     get(`${devAddress}/teams/${teamId}/members`);

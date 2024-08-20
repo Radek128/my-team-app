@@ -3,18 +3,17 @@ import { Button } from '../buttons/Button';
 import { Modal } from '../../controls/modals/Modal';
 
 interface ConfirmationModalProps {
+  isActive: boolean,
   isOpen: boolean,
   onClose: () => void,
-  text: string
+  actionHandler: () => void,
 }
 
-export const ConfirmationModal = ({isOpen, text, onClose } : ConfirmationModalProps) => {
+export const ActionModal = ({isOpen, onClose, actionHandler, isActive } : ConfirmationModalProps) => {
+    const text = isActive ? "Zablokuj" : "Odblokuj"
   return (
     <Modal isOpen={isOpen} onClose={onClose} >
-    <div className="modal">
-      <p>{text}</p>
-      <Button onClickHandler={onClose} text='Zamknij'/>
-    </div>
+      <Button onClickHandler={actionHandler} text={text}/>
     </Modal>
   );
 }

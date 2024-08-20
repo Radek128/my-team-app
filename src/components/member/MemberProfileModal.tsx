@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { TeamMember, UpdateMember, updateMember } from '../../api/member';
 import '../../styles.scss';
-import { Modal } from '../modals/Modal';
 import { Button } from '../buttons/Button';
 import { EditionSection, InputFileds } from './EditionSection';
+import { Modal } from '../../controls/modals/Modal';
 
 interface MemberProfileModalProps {
   onClose: () => void,
@@ -37,8 +37,14 @@ const MemberProfileModal = ({ onClose, member, status, isOpen }: MemberProfileMo
       ...prevState,
       [name]: value
   }));
-    await updateMember(updatedMember);
+    
 };
+
+const handleSubmit = async () => {
+  await updateMember(updatedMember);
+  onClose();
+}
+
   const {firstName, lastName, email, phoneNumber } = updatedMember;
 
   const inputFields :  InputFileds[]= [
@@ -57,6 +63,7 @@ const MemberProfileModal = ({ onClose, member, status, isOpen }: MemberProfileMo
       <div className='modal-confirm-body'>
       <EditionSection inputFields={inputFields} handleChange={handleChange}/>
       </div>
+      <Button onClickHandler={handleSubmit} text='Potwierdź'/>
       <Button onClickHandler={onClose} text={"Zamknij"}/>
     </div>
     </Modal>
