@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from '../buttons/Button';
 import { Modal } from '../../controls/modals/Modal';
+import { Button } from '../../controls/buttons/Button';
 
 interface ConfirmationModalProps {
   isActive: boolean,

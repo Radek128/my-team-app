@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { createStore } from './redux/store';
-import { Provider } from 'react-redux';
-import { CreateTeam, createTeam } from './api/team';
+import React from 'react';
 import './styles.scss';
-import MembersList from './components/team/MembersList';
-
+import Home from "./pages/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import TeamDetails from './components/team/TeamDetails';
 const App: React.FC = () => {
-  const [store] = useState(createStore())
-  const [teamId, setTeamId] = useState<CreateTeam | null>(null)
-  useEffect(() => {
-    const model = {teamId: crypto.randomUUID(), name:""}
-    createTeam(model).then(x => setTeamId({teamId:x , name: model.name}));
-  }, [])
-
   return (
-    <Provider store={store}>
     <div className="app-container">
-      {teamId?.teamId && <MembersList teamId={teamId.teamId} name={teamId.name}/>}
+      <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/team/:teamId" element={<TeamDetails/>} />
+      </Routes>
+    </Router>
     </div>
-    </Provider>
   );
 };
 

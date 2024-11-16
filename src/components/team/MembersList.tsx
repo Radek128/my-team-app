@@ -6,6 +6,8 @@ import '../../styles.scss';
 import { useTeamMembers } from '../../hooks/useTeamList';
 import * as signalR from "@microsoft/signalr";
 import { TeamMemberDto } from '../../api/member';
+import { Provider } from 'react-redux';
+import { createStore } from '../../redux/store';
 
 export interface MembersListProps{
   teamId: string
@@ -16,8 +18,9 @@ const MembersList = ({teamId, name}: MembersListProps) => {
   const [isAddMemberModalOpen, setAddMemberModalOpen] = useState<boolean>(false);
   const {members, loadMembers, addImportMemberStarted, addMember, addMemberOnServerStarted, updateMember, updateMemberStatus} = useTeamMembers();
   const [connection, setConnection] = useState<signalR.HubConnection |  null>(null);
-
+  const [store, setStore] = useState<ReturnType<typeof createStore> | null>(null);
 useEffect(() => {
+  setStore(createStore());
     const newConnection = new signalR.HubConnectionBuilder()
     .withUrl("http://localhost:5001/newTeamMember")
     .withAutomaticReconnect()
@@ -40,7 +43,6 @@ if(connection){
      addMember(member).then(() => console.log(`NotifyNewMember group: ${teamId}`))
   });
 }
-
 
 loadMembers(teamId)
 
@@ -65,13 +67,17 @@ const handleAddMemberModal = () => {
 const handleCloseModal =  () => {
   setAddMemberModalOpen(false);
 }
-
+if (!store) {
+  return <div>Ładowanie...</div>;
+}
   return (
+    <Provider store={store}>
     <div className="team-list">
       <MembersListHeader onClickAddHandler={handleAddMemberModal} onClickImportHandler={handleImportMember}/>
       <MembersListContent members={members} onUpdateMemberStatus={updateMemberStatus} onUpdateMember={updateMember}/>
       <AddMemberModal isOpen={isAddMemberModalOpen} teamId={teamId} onClose={handleCloseModal} addMemberOnServerStarted={addMemberOnServerStarted}/>
     </div>
+    </Provider>
   );
 };
 

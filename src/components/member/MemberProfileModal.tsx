@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { TeamMember, UpdateMember } from '../../api/member';
 import '../../styles.scss';
-import { Button } from '../buttons/Button';
 import { EditionSection, InputFileds } from './EditionSection';
 import { Modal } from '../../controls/modals/Modal';
+import { Button } from '../../controls/buttons/Button';
 
 interface MemberProfileModalProps {
   onClose: () => void,

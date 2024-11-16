@@ -1,4 +1,4 @@
-import { Button } from "../buttons/Button"
+import { Button } from '../../controls/buttons/Button';
 import '../../styles.scss';
 
 export interface TeamListHeaderProps{
