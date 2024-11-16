@@ -1,9 +1,10 @@
 import { post } from "./axiosSource";
 
-const devAddress = 'https://localhost:5000'
+const devAddress = 'http://localhost:5001'
 
 export interface CreateTeam{
     teamId?: string;
+    name: string;
 }
 export const createTeam = (team: CreateTeam): Promise<string> => 
     post(`${devAddress}/teams`, team);

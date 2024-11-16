@@ -6,7 +6,7 @@ export interface UseFetchUserProps {
     teamId: string
 }
 
-export const useFetchUser = ({ teamId }: UseFetchUserProps): () => Promise<TeamMember> => {
+export const fetchUser = ({ teamId }: UseFetchUserProps): () => Promise<TeamMember> => {
 
     const fetchUser = async (): Promise<TeamMember> => {
       try {

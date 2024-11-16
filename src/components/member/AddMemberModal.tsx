@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { createMember, TeamMember } from '../../api/member';
+import { TeamMember } from '../../api/member';
 import { Button } from '../buttons/Button';
 import { EditionSection, InputFileds } from './EditionSection';
 import { Modal } from '../../controls/modals/Modal';
@@ -8,7 +8,8 @@ import '../../styles.scss';
 interface AddMemberProps {
   isOpen: boolean,
   onClose: () => void,
-  teamId: string
+  teamId: string,
+  addMemberOnServerStarted: (member: TeamMember) => Promise<void>
 }
 
 interface MemberToAdd {
@@ -19,7 +20,7 @@ interface MemberToAdd {
   avatar: string;
 }
 
-const AddMemberModal = ({ isOpen, onClose, teamId } : AddMemberProps) => {
+const AddMemberModal = ({ isOpen, onClose, teamId, addMemberOnServerStarted  } : AddMemberProps) => {
   const [member, setMember] = useState<MemberToAdd>({
     firstName: "",
     lastName: "",
@@ -51,7 +52,7 @@ const AddMemberModal = ({ isOpen, onClose, teamId } : AddMemberProps) => {
     email: email,
     memberId: crypto.randomUUID(), 
     };
-    await createMember(teamMember)
+    await addMemberOnServerStarted(teamMember)
     onClose();
   };
 

@@ -1,6 +1,6 @@
 import { get, post, put } from "./axiosSource";
 
-const devAddress = 'https://localhost:5000'
+const devAddress = 'http://localhost:5001'
 
 export interface UpdateMemberStatus{
   isActiveStatus: boolean;

@@ -6,7 +6,7 @@ export interface TeamListHeaderProps{
     onClickAddHandler: () => void,
 }
 
-export const TeamListHeader = ({onClickImportHandler, onClickAddHandler}: TeamListHeaderProps) => {
+export const MembersListHeader = ({onClickImportHandler, onClickAddHandler}: TeamListHeaderProps) => {
 
 return (
     <div className="team-list__header">

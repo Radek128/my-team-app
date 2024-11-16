@@ -1,4 +1,4 @@
-import { TeamMemberDto, UpdateMemberStatus, updateMemberStatus } from '../../api/member';
+import { TeamMemberDto, UpdateMember, UpdateMemberStatus } from '../../api/member';
 import { useState } from 'react';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import MemberProfileModal from '../member/MemberProfileModal';
@@ -7,10 +7,11 @@ import { ActionModal } from '../member/MemberActionModal';
 
 interface AddMemberProps {
   member: TeamMemberDto,
-  handleCloseModal: () => void;
+  onUpdateMemberStatus: (member: UpdateMemberStatus) => Promise<void>;
+  onUpdateMember: (member: UpdateMember) => Promise<void>;
 }
 
-export const TeamMemberItem = ({ member, handleCloseModal } : AddMemberProps) => {
+export const TeamMemberItem = ({ member, onUpdateMemberStatus, onUpdateMember } : AddMemberProps) => {
   const [isMemberProfileOpen, setMemberProfileOpen] = useState<boolean>(false);
   const [isActionModalOpen, setActionModalOpen] = useState<boolean>(false);
   const status = member.isActive ? "Aktywny" : "Nieaktywny";
@@ -21,12 +22,10 @@ export const TeamMemberItem = ({ member, handleCloseModal } : AddMemberProps) =>
   }
 
   const handleClose =  () => {
-    handleCloseModal();
     setMemberProfileOpen(false);
   }
 
   const handleCloseActionModal = () => {
-    handleCloseModal();
     setActionModalOpen(false);
   }
 
@@ -36,7 +35,7 @@ export const TeamMemberItem = ({ member, handleCloseModal } : AddMemberProps) =>
       isActiveStatus : !member.isActive
     }
 
-    await updateMemberStatus(model);
+    await onUpdateMemberStatus(model);
     handleCloseActionModal();
   }
   
@@ -57,12 +56,13 @@ export const TeamMemberItem = ({ member, handleCloseModal } : AddMemberProps) =>
       isOpen ={isMemberProfileOpen} 
       member={member}
       onClose={handleClose} 
-      status={status}/>
+      status={status}
+      onUpdateMember={onUpdateMember}/>
     <ActionModal
-     actionHandler={handleActionChangeStatus} 
-     isOpen={isActionModalOpen} 
-     isActive={member.isActive } 
-     onClose={handleCloseActionModal}/>
+      actionHandler={handleActionChangeStatus} 
+      isOpen={isActionModalOpen} 
+      isActive={member.isActive } 
+      onClose={handleCloseActionModal}/>
     </>
   );
 };

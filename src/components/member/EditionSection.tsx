@@ -16,7 +16,7 @@ export const EditionSection = ( {inputFields, handleChange}: EditSectionProps) =
 {
     return (
         <>      
-        {inputFields.map((field, index) => (
+        {inputFields.map((field, index) => 
             <Input
               key={index}
               type={field.type}
@@ -24,7 +24,7 @@ export const EditionSection = ( {inputFields, handleChange}: EditSectionProps) =
               value={field.value}
               handleChange={e => handleChange(field.name, e)}
             />
-          ))}
+          )}
         </>
     )
 }

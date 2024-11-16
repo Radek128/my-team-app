@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { TeamMember, UpdateMember, updateMember } from '../../api/member';
+import React, { useState } from 'react';
+import { TeamMember, UpdateMember } from '../../api/member';
 import '../../styles.scss';
 import { Button } from '../buttons/Button';
 import { EditionSection, InputFileds } from './EditionSection';
@@ -9,39 +9,25 @@ interface MemberProfileModalProps {
   onClose: () => void,
   member: TeamMember,
   status: string,
-  isOpen: boolean
+  isOpen: boolean,
+  onUpdateMember: (member: UpdateMember) => Promise<void>;
 }
 
-const MemberProfileModal = ({ onClose, member, status, isOpen }: MemberProfileModalProps) => {
+const MemberProfileModal = ({ onClose, member, status, isOpen, onUpdateMember }: MemberProfileModalProps) => {
   const [updatedMember, setMember] = useState<UpdateMember>({
-    memberId: member.memberId,
-    firstName: member.firstName,
-    lastName: member.lastName,
-    phoneNumber: member.phoneNumber,
-    email: member.email,
+  ...member
   })
-
-  useEffect(() => {
-    setMember({
-      memberId: member.memberId,
-      firstName: member.firstName,
-      lastName: member.lastName,
-      phoneNumber: member.phoneNumber,
-      email: member.email,
-    })
-  }, [isOpen])
 
   const handleChange = async (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setMember(prevState => ({
       ...prevState,
       [name]: value
-  }));
-    
+  }));   
 };
 
 const handleSubmit = async () => {
-  await updateMember(updatedMember);
+  await onUpdateMember(updatedMember);
   onClose();
 }
 
